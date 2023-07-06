@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     MhsModel mm;
     DbHelper dbase;
     boolean isEdit;
+    int dataCount; // Variabel untuk menghitung jumlah data yang telah diinput
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnSimpan = (Button) findViewById(R.id.btnSimpan);
 
         mhsList = new ArrayList<>();
+        dataCount = 0; // Inisialisasi jumlah data menjadi 0
 
         isEdit = false;
 
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 if(isian_nama.isEmpty() || isian_nim.isEmpty() || isian_noHp.isEmpty()){
                     Toast.makeText(getApplicationContext(),"Isian Masih Kosong", Toast.LENGTH_SHORT).show();
                 }else{
+                    if (dataCount < 5) { // Cek jumlah data yang telah diinput
                     //mhsList.add(new MhsModel(-1,isian_nama,isian_nim,isian_noHp));
 
                     boolean stts;
@@ -68,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         edNama.setText("");
                         edNim.setText("");
                         edNoHp.setText("");
+                        dataCount++; // Tambahkan jumlah data yang diinput
 
                     }else {
                         mm = new MhsModel(mm.getId(),isian_nama, isian_nim, isian_noHp);
